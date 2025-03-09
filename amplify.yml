@@ -10,10 +10,9 @@ backend:
     build:
       commands:
         - echo "Deploying backend via Amplify Gen2..."
-        # Deploy your CDK-based backend (this command may vary based on your configuration)
-        - npx ampx deploy
+        # Use the pipeline-deploy command for CI/CD deployments
+        - npx ampx pipeline-deploy
   artifacts:
-    # You can specify the directory where your built backend artifacts reside, if applicable.
     baseDirectory: amplify
     files:
       - '**/*'
@@ -28,7 +27,6 @@ frontend:
         - echo "Building the frontend..."
         - npm run build
   artifacts:
-    # Change "build" to the directory where your production-ready files are output.
     baseDirectory: build
     files:
       - '**/*'
