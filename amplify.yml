@@ -4,14 +4,12 @@ backend:
     preBuild:
       commands:
         - echo "Installing backend dependencies..."
-        # Install Amplify CLI globally if needed (ensure version supports Gen2)
         - npm install -g @aws-amplify/cli
         - npm install
     build:
       commands:
         - echo "Deploying backend via Amplify Gen2..."
-        # Use the pipeline-deploy command for CI/CD deployments
-        - npx ampx pipeline-deploy
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
   artifacts:
     baseDirectory: amplify
     files:
