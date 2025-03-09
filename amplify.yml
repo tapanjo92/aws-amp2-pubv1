@@ -1,0 +1,38 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing backend dependencies..."
+        # Install Amplify CLI globally if needed (ensure version supports Gen2)
+        - npm install -g @aws-amplify/cli
+        - npm install
+    build:
+      commands:
+        - echo "Deploying backend via Amplify Gen2..."
+        # Deploy your CDK-based backend (this command may vary based on your configuration)
+        - npx ampx deploy
+  artifacts:
+    # You can specify the directory where your built backend artifacts reside, if applicable.
+    baseDirectory: amplify
+    files:
+      - '**/*'
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing frontend dependencies..."
+        - npm ci
+    build:
+      commands:
+        - echo "Building the frontend..."
+        - npm run build
+  artifacts:
+    # Change "build" to the directory where your production-ready files are output.
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+
